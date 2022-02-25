@@ -6,6 +6,7 @@ This is a program used to check whether a file is a hex file or not? If yes, the
 
 - Format: ![Record Format](Format.png)
 
+- Data Record: (ll types) ![Record Types](RecordTypes.png)
 # ERRORS
 - Could not open Hex File.
 - Wrong format on specific line.
