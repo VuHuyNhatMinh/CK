@@ -73,3 +73,66 @@ bool GetLine(char hexLineInput[], uint8_t lineData[], uint16_t *address, uint8_t
     
     return true;
 };
+
+int LineCount(char hexInput[]){
+    int i = 0, lineCount = 0;
+    while (hexInput[i] != '\0')
+    {
+        if(hexInput[i] == ':'){
+            lineCount ++;
+        }
+        i++;
+    }
+    return lineCount;
+};
+
+int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
+      int lineIndex = 0;
+    int charIndex = 0;
+    int rawDataIndex = 0;
+    int byteIndex = 0;
+    int totalByteRead = 0;
+    //Get line count
+    int linesInHexfile = LineCount(hexInput);
+    //Data of single line.
+    uint8_t lineData[255] = {0};
+    char lineRawData[520] = {'\0'};
+    unsigned short startAdd[25] = {0};
+    uint8_t byteOnLine[25] = {0};
+
+    //Parse line by line and write to output.
+    while (lineIndex < linesInHexfile)
+    {
+        //Read line from ':' until '\n'.
+        while (hexInput[charIndex] != '\n')
+        {
+            //skip ':' mark.
+            if(hexInput[charIndex] != ':') {
+              lineRawData[rawDataIndex] = hexInput[charIndex];
+              rawDataIndex++;
+            }
+            charIndex++;
+        }
+        charIndex++;
+        //Parse single line.
+        if (GetLine(lineRawData, lineData, &startAdd[lineIndex], &byteOnLine[lineIndex]))
+        {
+            //Write to array.
+            while (byteIndex < byteOnLine[lineIndex])
+            {
+                hexDataOutput[startAdd[lineIndex] + byteIndex] = lineData[byteIndex];
+                lineData[byteIndex] = '\0';
+                byteIndex++;
+            }
+            
+        }
+        rawDataIndex = 0;
+        byteIndex = 0;
+        lineIndex++;
+    }
+  for (lineIndex = 0; lineIndex < linesInHexfile; lineIndex++)
+  {
+    totalByteRead += byteOnLine[lineIndex];
+  }
+    return totalByteRead;
+};
