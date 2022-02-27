@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ABOUT
 This is a program used to check whether a file is a hex file or not? If yes, the content will be displayed on terminal (cmd), 25 lines respectively. If there is an error when compiling, it will be showned also.
 
