@@ -14,7 +14,7 @@ bool check_open(char a[])  //input là arg[1]
     ifstream fin(a);                             
     if(!fin.is_open())  
 	{
-		cout<<"Error: " < <a <<" could not be opened.";
+		cout<<"Error: " << a <<" could not be opened.";
         return false;
 	}
     else
