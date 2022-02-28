@@ -87,7 +87,7 @@ int LineCount(char hexInput[]){
 };
 
 int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
-      int lineIndex = 0;
+    int lineIndex = 0;
     int charIndex = 0;
     int rawDataIndex = 0;
     int byteIndex = 0;
@@ -97,8 +97,8 @@ int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
     //Data of single line.
     uint8_t lineData[255] = {0};
     char lineRawData[520] = {'\0'};
-    unsigned short startAdd[25] = {0};
-    uint8_t byteOnLine[25] = {0};
+    unsigned short startAdd[500] = {0};
+    uint8_t byteOnLine[500] = {0};
 
     //Parse line by line and write to output.
     while (lineIndex < linesInHexfile)

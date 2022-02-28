@@ -42,7 +42,7 @@ int main(int argc, char *argv[]){
       printf ("\nThe line is too long in File : %s", inputFileDir);      
    }
 
-   uint8_t output[10000] = {'\0'};
+  uint8_t output[500000] = {'\0'};
   int charNum = ParseLineByLine(buffer, output);
   int i = 0;
     while (i < charNum)

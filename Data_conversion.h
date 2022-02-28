@@ -1,3 +1,11 @@
+/*Nguyen Dinh Quoc Dai _ MSV: 20191724
+
+
+
+*/
+
+
+
 #include<stdio.h>
 #include<stdint.h>
 #include <stdbool.h>
