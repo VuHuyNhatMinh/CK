@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#include"Data_conversion.h"
+
 
 #define MAXLENGTH  100 
 #define MAXFILESIZE 65536
@@ -28,7 +30,7 @@ int main(int argc, char *argv[]){
 	 strcat(buffer,temp);
 	 
    }
-	// printf("%s", buffer);
+ 
 	/* fgets() returned NULL.  Now you can check why.... */
    if(feof(fptr))
    {
@@ -40,9 +42,21 @@ int main(int argc, char *argv[]){
       printf ("\nThe line is too long in File : %s", inputFileDir);      
    }
 
+   uint8_t output[10000] = {'\0'};
+  int charNum = ParseLineByLine(buffer, output);
+  int i = 0;
+    while (i < charNum)
+    {
+       printf("%X ", output[i]);
+       i++;
+    }
+    printf("%d", charNum); 
+   
+
+
   fclose(fptr);
   printf("%c", '\n');
   system("pause");
   return 0;
-}
+} 
 
