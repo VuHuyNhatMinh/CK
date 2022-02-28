@@ -1,7 +1,8 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
 #include"Data_conversion.h"
+
 
 
 #define MAXLENGTH  100 
@@ -43,15 +44,30 @@ int main(int argc, char *argv[]){
    }
 
   uint8_t output[500000] = {'\0'};
-  int charNum = ParseLineByLine(buffer, output);
+  uint16_t beginAdd = 0;
+  int charNum = ParseLineByLine(buffer, output, &beginAdd);
+  uint16_t addCol[100] = {0};
+  int j = addressColumn(beginAdd, charNum, 16, addCol);
   int i = 0;
+  int k = 0;
+  printf("\n%X ", addCol[k]);
     while (i < charNum)
     {
        printf("%X ", output[i]);
        i++;
+       if ((i+1)%16 == 0)
+       {
+         k++; 
+         printf("\n%X ", addCol[k]);
+         
+       }
     }
+
     printf("%d", charNum); 
    
+
+
+
 
 
   fclose(fptr);

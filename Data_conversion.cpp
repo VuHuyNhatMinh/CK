@@ -86,7 +86,7 @@ int LineCount(char hexInput[]){
     return lineCount;
 };
 
-int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
+int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[], uint16_t *beginAdd){
     int lineIndex = 0;
     int charIndex = 0;
     int rawDataIndex = 0;
@@ -134,5 +134,19 @@ int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
   {
     totalByteRead += byteOnLine[lineIndex];
   }
+  *beginAdd = startAdd[0];
     return totalByteRead;
 };
+
+
+
+int addressColumn(uint16_t beginAddress, int totalByte,  int bytePerLine, uint16_t addressColumn[]){
+    //Write begining address to output for display.
+    
+    for (int lineIndex = 0; lineIndex < ((totalByte/bytePerLine) + 1); lineIndex++)
+    {
+        addressColumn[lineIndex] = beginAddress + lineIndex*bytePerLine;
+    }
+    return ((totalByte/bytePerLine) + 1);
+    
+}
