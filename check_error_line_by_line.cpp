@@ -106,7 +106,7 @@ bool check_error_line_by_line(string data)
         {   
             int result=0;
             string result_1="";
-            for(int j=0;j<data_temp.size()-2;j+=2)
+            for(int j=0;j<=data_temp.size()-4;j+=2)
             {
                 string a = "";
                 a+=data_temp[j];
