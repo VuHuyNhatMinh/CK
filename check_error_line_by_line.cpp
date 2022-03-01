@@ -3,8 +3,8 @@
 #include <math.h>
 using namespace std;
 
-
-int bin_to_dec(string bin)
+//chuyển binary ở dạng string sang số decimal
+int bin_to_dec(string bin) 
 {
     int res=0;
     for(int i=0;i<bin.size()-1;i++)
@@ -14,6 +14,8 @@ int bin_to_dec(string bin)
     return res;
 }
 
+
+//chuyển một số decimal sang số binary ở dạng string
 string dec_to_bin(int value)
 {   
     string res;
@@ -37,6 +39,8 @@ string dec_to_bin(int value)
     return reverse_res;
 }
 
+
+//chuyển số decimal sang số hex ở dạng string
 string dec_to_hex(int value)
 {
     string res = "";
@@ -62,6 +66,8 @@ string dec_to_hex(int value)
 
 }
 
+
+//chuyển số hex ở dạng string sang số deciaml
 int hex_to_dec(string hex)   //hàm truyền vào là một string hex, đầu ra là decimal
 {
     int res = 0;
@@ -79,7 +85,8 @@ int hex_to_dec(string hex)   //hàm truyền vào là một string hex, đầu r
     return res;
 }
 
-
+//check các lỗi như checksum, lỗi count_byte, lỗi option_byte
+//đầu vào là string tất cả data, trả về true nếu không lỗi, trả về false + in ra loại lỗi ở dòng nào đó (lỗi ở dòng đầu tiên) 
 bool check_error_line_by_line(string data)
 {
     data+='\n';
