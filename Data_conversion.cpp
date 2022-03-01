@@ -140,7 +140,7 @@ int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[], uint16_t *beginAdd
 
 
 
-int addressColumn(uint16_t beginAddress, int totalByte,  int bytePerLine, uint16_t addressColumn[]){
+int AddressColumn(uint16_t beginAddress, int totalByte,  int bytePerLine, uint16_t addressColumn[]){
     //Write begining address to output for display.
     
     for (int lineIndex = 0; lineIndex < ((totalByte/bytePerLine) + 1); lineIndex++)
@@ -150,3 +150,18 @@ int addressColumn(uint16_t beginAddress, int totalByte,  int bytePerLine, uint16
     return ((totalByte/bytePerLine) + 1);
     
 }
+
+bool PrintAddress_n_Data(uint16_t addressColumn[], uint8_t hexData[], int totalByte, int bytePerLine, int lineNumber ){
+    //Print starting address of line.
+    printf("%4X       ", addressColumn[lineNumber]); //4 space for address (Max: 0xFFFF h), 5 space for indent
+    //Print Byte data.
+    for (int index = lineNumber*bytePerLine; index < (lineNumber + 1)*bytePerLine ; index++)
+    {   
+        if (index < totalByte)
+        {
+             printf("%02X  ", hexData[index]); 
+             //Preceding with zeros, 2 space for displaying Byte in char, 2 space for indent
+        }      
+    }
+    return true;
+};

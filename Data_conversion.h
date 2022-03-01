@@ -15,4 +15,5 @@ uint8_t HexChar2Byte(char hex[2]);
 bool GetLine(char hexLineInput[], uint8_t lineData[255], uint16_t *address, uint8_t *numberOfBytesOnLine );
 int LineCount(char hexInput[]);
 int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[], uint16_t *beginAdd);
-int addressColumn(uint16_t beginAddress, int totalByte,  int bytePerLine, uint16_t addressColumn[]);
+int AddressColumn(uint16_t beginAddress, int totalByte,  int bytePerLine, uint16_t addressColumn[]);
+bool PrintAddress_n_Data(uint16_t addressColumn[], uint8_t hexData[], int totalByte, int bytePerLine, int lineNumber );
