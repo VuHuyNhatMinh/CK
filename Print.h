@@ -103,7 +103,7 @@ void Print(uint8_t buffer[], int length){
     {
         system("cls");
         Print_Header();
-        for ( line = 0; line < 24; line++)
+        for ( line = 0; line < 25; line++)
         {
             if ((25*page + line) < (length/16 + 1))
             {
