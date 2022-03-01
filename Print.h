@@ -30,23 +30,94 @@ void Char_Convert(uint8_t data_byte[], int length, char ascii_char[]){
     return;
 };
 
-//In các giá trị Ascii ra màn hình.
-//Đầu vào: mảng các kí tự ascii, số dòng, số kí tự trên dòng, độ dài mảng kí tự.
-//Đầu ra: in ra màn hình....
-void Print_Ascii_Line(char data_ascii[], int line, int char_per_line, int data_length ){
-    //Chạy vòng lặp từ đầu dòng tới cuối dòng, in từng giá trị của dòng đó ra.
-    int i = line*char_per_line ;
-    while ( i < (line + 1)*char_per_line )
+
+
+void Print_Line(int line, uint8_t buffer[]){
+    printf("     %04X     |", line*16 );
+    for (int i = 0; i < 16; i++)
     {
-        if ( i < data_length)
+        printf("%2X ", buffer[line*16 + i]);
+    }
+    printf("|");
+    for (int i = 0; i < 16; i++)
+    {
+        printf("%c", (char)buffer[line*16 + i] );
+    }
+    printf("\n");
+};
+
+void Print_Header(){
+    printf("\nStart Address |");
+    for (int i = 0; i < 16; i++)
+    {
+        printf("%2X ", i);
+    }
+    printf("| %8s\n", "ASCII Char");
+
+    int i = 1;
+    while (i < 81)
+    {
+        if (i == 15 || i == 64)
         {
-            printf("%c", data_ascii[i]);
+            printf("%c", '|');
             i++;
         }
-        else{i++;}
+        else{
+        printf("%c", '_');
+        i++;
+        }
+    }
+    printf("\n");
+};
+
+void Print_Footer(int current_page, int total_page){
+    int i = 1;
+    while (i < 81)
+    {
+        if (i == 15 || i == 64)
+        {
+            printf("%c", '|');
+            i++;
+        }
+        else{
+        printf("%c", '_');
+        i++;
+        }
+    }
+    printf("\n");
+
+    printf("Page No. %d / %d\n", current_page, total_page);
+};
+
+
+void Print(uint8_t buffer[], int length){
+    //Chuyển các giá trị không in được thành FF
+    Process_Zero(buffer, length);
+    
+    //Khởi tạo biến
+    int line = 0, page = 0;
+    int total_page = length/400 + 1;
+
+    //Hiển thị 3 vùng ra màn hình
+    while (page < total_page)
+    {
+        system("cls");
+        Print_Header();
+        for ( line = 0; line < 24; line++)
+        {
+            if ((25*page + line) < (length/16 + 1))
+            {
+                Print_Line((25*page + line), buffer );
+            }
+            
+        }
+        Print_Footer(page + 1, total_page);
+        system("pause");
+        page++;
         
-    };
-    return;
+    }
+    
+
 };
 
 
