@@ -7,6 +7,7 @@
 
 #include "ErrorChecking.h"
 #include "generateData.h"
+#include "DataConversion.h"
 
 int main(int argc, char* argv[]) 
 {
@@ -26,17 +27,22 @@ int main(int argc, char* argv[])
     }
 
     /* Create content to display */
-    while (1)
-    {
-        string newline = separateLine(data);
-        if (newline == "")
-        {
-            break;
-        }
-        else
-        {
-            // TO DO
-        }
+    uint8_t byteData[50000] = {'\0'};
+    uint16_t beginAdd = 0;
+    uint16_t addCol[1000] = {0};
+    int lineIndex = 0;
+
+    int charNum = ParseLineByLine(data, byteData, &beginAdd);
+    int totalLine = AddressColumn(beginAdd, charNum, 16, addCol);
+    
+    //Print header
+    printf("\n");
+    printf("%s ", "Begin Add");
+    printf("%32s\n", "Data");
+    for (lineIndex = 0; lineIndex < totalLine; lineIndex++)
+    { 
+        PrintAddress_n_Data(addCol, byteData, charNum, 16, lineIndex);
+        printf("\n");
     }
 
     /* Display */
