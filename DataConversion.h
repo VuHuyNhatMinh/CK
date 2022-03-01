@@ -1,4 +1,6 @@
-#include"Data_conversion.h"
+#include <iostream>
+
+using namespace std;
 
 uint8_t HexChar2Int(char hex){
     if (hex >= '0' && hex <= '9')
@@ -74,7 +76,7 @@ bool GetLine(char hexLineInput[], uint8_t lineData[], uint16_t *address, uint8_t
     return true;
 };
 
-int LineCount(char hexInput[]){
+int LineCount(string hexInput){
     int i = 0, lineCount = 0;
     while (hexInput[i] != '\0')
     {
@@ -86,7 +88,7 @@ int LineCount(char hexInput[]){
     return lineCount;
 };
 
-int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[], uint16_t *beginAdd){
+int ParseLineByLine(string hexInput, uint8_t hexDataOutput[], uint16_t *beginAdd){
     int lineIndex = 0;
     int charIndex = 0;
     int rawDataIndex = 0;
