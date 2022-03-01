@@ -1,6 +1,4 @@
-/*
- Author : Nguyen Tien Linh 20191924
-*/ 
+// Nguyen Tien Linh 20191924
 #include<iostream>
 using namespace std;
 

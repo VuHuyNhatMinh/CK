@@ -2,6 +2,7 @@
 #include<cstring>
 #include<cstdlib>
 #include"Data_conversion.h"
+#include"Print.h"
 
 
 
@@ -58,11 +59,13 @@ int main(int argc, char *argv[]){
   //MAIN PROGRAM (How to use)
   uint8_t byteData[65536] = {0}; //Maximum of 64KBytes.
   int byteNum = ParseLineByLine(buffer, byteData);
-  for (int i = 0; i < byteNum; i++)
-  {
-    printf("%02X ", byteData[i]);
-  }
+  // for (int i = 0; i < byteNum; i++)
+  // {
+  //   printf("%02X ", byteData[i]);
+  // }
   
+
+  Print(byteData, byteNum);
   
 
 
@@ -73,7 +76,7 @@ int main(int argc, char *argv[]){
 
   fclose(fptr);
   printf("%c", '\n');
-  system("pause");
+  // system("pause");
   return 0;
 } 
 
