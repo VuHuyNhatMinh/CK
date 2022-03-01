@@ -5,17 +5,19 @@
 #include<cstdint>
 #include <cstdbool>
 #include<iostream>
- using namespace std;
+using namespace std;
+
+
 
 
 // Define line structure
-struct Line{   
+struct Line {   
     //Hex line: (:ll aaaa tt [dd....] cc)
-    uint8_t byteCount; // ll - hold length
-    uint16_t startAddress; //aaaa - hold starting address
-    uint8_t dataType; //tt - hold data type value
-    uint8_t data[32]; //[dddd....] hold data value maximum of 32 byte
-    uint8_t checkSum;  //cc - hold check sum value
+    uint8_t byteCount = 0; // ll - hold length
+    uint16_t startAddress = 0; //aaaa - hold starting address
+    uint8_t dataType = 0; //tt - hold data type value
+    uint8_t data[32] = {0}; //[dddd....] hold data value maximum of 32 byte
+    uint8_t checkSum = 0;  //cc - hold check sum value
 };
 
 //Function to convert single character (hexadecimal) to int (decimal). 
@@ -44,7 +46,7 @@ uint8_t HexChar2Byte(char hex[2]){
 
 
 //Get infomation of single line
-bool GetLine(string hexLineInput, Line *intOutput ){
+bool GetLine(char hexLineInput[], Line *intOutput ){
     char temp[2];
     uint8_t addTemp;
     int dataIndex = 0;
@@ -123,7 +125,7 @@ int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
     char lineRawData[520] = {'\0'};
     // unsigned short startAdd[100] = {0};
     // uint8_t byteOnLine[100] = {0};
-    Line lineTemp;
+    struct Line lineTemp[100];
 
     //Parse line by line and write to output.
     while (lineIndex < linesInHexfile)
@@ -140,12 +142,12 @@ int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
         }
         charIndex++;
         //Parse single line.
-        if (GetLine(lineRawData, lineData, &startAdd[lineIndex], &byteOnLine[lineIndex]))
+        if (GetLine(lineRawData, &lineTemp[lineIndex] ))
         {
             //Write to array.
-            while (byteIndex < byteOnLine[lineIndex])
+            while (byteIndex < lineTemp[lineIndex].byteCount)
             {
-                hexDataOutput[startAdd[lineIndex] + byteIndex] = lineData[byteIndex];
+                hexDataOutput[lineTemp[lineIndex].startAddress + byteIndex] = lineTemp[lineIndex].data[byteIndex];
                 lineData[byteIndex] = '\0';
                 byteIndex++;
             }
@@ -157,7 +159,7 @@ int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
     }
     for (lineIndex = 0; lineIndex < linesInHexfile; lineIndex++)
     {
-        totalByteRead += byteOnLine[lineIndex];
+        totalByteRead += lineTemp[lineIndex].byteCount;
     }
     return totalByteRead;
 }

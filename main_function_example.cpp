@@ -1,7 +1,7 @@
 #include<cstdio>
 #include<cstring>
 #include<cstdlib>
-#include"DataConversion.h"
+#include"Data_conversion.h"
 
 
 
@@ -56,23 +56,14 @@ int main(int argc, char *argv[]){
 
 
   //MAIN PROGRAM (How to use)
-  uint8_t byteData[50000] = {'\0'};
-  uint16_t beginAdd = 0;
-  uint16_t addCol[1000] = {0};
-  int lineIndex = 0;
-
-  int charNum = ParseLineByLine(buffer, byteData, &beginAdd);
-  int totalLine = AddressColumn(beginAdd, charNum, 16, addCol);
+  uint8_t byteData[65536] = {0}; //Maximum of 64KBytes.
+  int byteNum = ParseLineByLine(buffer, byteData);
+  for (int i = 0; i < byteNum; i++)
+  {
+    printf("%02X ", byteData[i]);
+  }
   
-  //Print header
-  printf("\n");
-  printf("%s ", "Begin Add");
-  printf("%32s\n", "Data");
-  for (lineIndex = 0; lineIndex < totalLine; lineIndex++)
-   { 
-     PrintAddress_n_Data(addCol, byteData, charNum, 16, lineIndex);
-     printf("\n");
-   }
+  
 
 
 
