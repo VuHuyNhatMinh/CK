@@ -1,39 +1,45 @@
 #ifndef _GENERATE_DATA_
-#define _GENERATE_DATE_
+#define _GENERATE_DATA_
 
 #include <iostream>
 #include <fstream>
+#include <cstring>
 
 using namespace std;
 
-string getData(string filename)
+void getData(char* buffer, string filename)
 {
     ifstream f;
     f.open(filename);
     string text;
     getline(f, text, '\0');
+    strcpy(buffer, text.c_str());
     f.close();
-    return text;
 }
 
-string separateLine(string text) 
+string separateLine(char* text, int size) 
 {
     static int i = 0;
     string line;
-    for(i; i < text.size() ; i = i + 1) 
+    for(i; i < size ; i = i + 1) 
     {
-        if (text[i] == ':')
+        char c = text[i];
+        if (c == ':')
         {
             continue;
         }
-        else if (text[i] == '\n')
+        else if (c == '\n')
         {
             i = i + 1;
             break;
         }
+        else if (c == 0)
+        {
+            break;
+        }
         else 
         {
-            line = line + text[i];
+            line = line + c;
         }
     }
     return line;
