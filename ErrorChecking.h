@@ -112,7 +112,7 @@ string dec_to_hex(int value)
 }
 
 
-//chuyển số hex ở dạng string sang số deciaml
+//chuyển số hex ở dạng string sang số decimal
 int hex_to_dec(string hex)   //hàm truyền vào là một string hex, đầu ra là decimal
 {
     int res = 0;
@@ -130,7 +130,10 @@ int hex_to_dec(string hex)   //hàm truyền vào là một string hex, đầu r
     return res;
 }
 
-string inverse(string text)
+
+
+//đảo tất cả các bit của một binary ở dạng string
+string inverse(string text)         //đầu vào là binary ở dạng string, đầu ra là binary ở dạng string
 {
     for(int k=0; k < text.size();k++)
     {
@@ -146,7 +149,10 @@ string inverse(string text)
     return text;
 }
 
-string get2LastBit(string text)
+
+
+//Lấy 2 kí tự cuối cùng của một string 
+string get2LastBit(string text)         
 {
     string temp;
     temp += text[text.size()-2];
@@ -158,57 +164,68 @@ string get2LastBit(string text)
 //đầu vào là string tất cả data, trả về true nếu không lỗi, trả về false + in ra loại lỗi ở dòng nào đó (lỗi ở dòng đầu tiên) 
 bool check_error_line_by_line(char* data, int size)
 {
-    int line = 1;  
+    int line = 1;                                               //lưu dòng đang xét là dòng bao nhiêu
     while(1)
     {
-        string data_temp = separateLine(data, size);
-        if (data_temp == "")
+
+
+        string data_temp = separateLine(data, size);            //xét từng dòng một của file data
+
+
+        if (data_temp == "")                                    //nếu không còn dòng nào nữa để xét
         {
             break;
         }
 
-        int result=0;
-        string result_1="";
-        for(int j=0;j<=data_temp.size()-4;j+=2)
+
+        int result=0;                                           //lưu giá trị decimal khi cộng các các byte trong quá trình checksum
+        string result_1="";                                     //lưu giá trị hex hoặc binary khi cộng các byte trong quá trình checksum
+
+
+
+        for(int j=0;j<=data_temp.size()-4;j+=2)                 //cộng tất cả các byte phải checksum của một dòng
         {
-            string a = "";
+            string a = "";                                      //lưu 1 byte một trong một dòng (gồm 2 chữ cái hex liên tục) ở dạng string hex
             a+=data_temp[j];
             a+=data_temp[j+1];
-            result+=hex_to_dec(a);
-        }
+            result+=hex_to_dec(a);                              //đổi string hex sang decimal rồi cộng vào result
+        }                                                      
+        //result =  tổng các byte cần checksum trong một dòng ở dạng decimal
 
 
-        if(dec_to_bin(result).size()<8)
+        if(dec_to_bin(result).size()<8)                         //nếu kích thước của result nhỏ hơn 8 bits
         {
-            for(int n=1;n<=(8-dec_to_bin(result).size());n++)
+            for(int n=1;n<=(8-dec_to_bin(result).size());n++)   //chèm them các bit 0 đằng trước để đủ 1 8 bits
             {
-                result_1+='0';
+                result_1+='0';                                  
             }
         }
-        else if(dec_to_bin(result).size()>=8)
+
+
+        else if(dec_to_bin(result).size()>=8)                   //nếu result đã đủ 8 bits hoặc nhiều hơn 8 bits
         {
-            result_1+='0';
+            result_1+='0';                                      //thêm một bit 0 đằng trước 
         }
 
         
-        result_1 += dec_to_bin(result);
+        result_1 += dec_to_bin(result);                         //chuyển result sang string binary rồi lưu vào result_1
 
-        result_1 = inverse(result_1);
+        result_1 = inverse(result_1);                           //đảo bit result_1
 
-        result = bin_to_dec(result_1);
-        result+=1;
-        result_1 = dec_to_hex(result);
+        result = bin_to_dec(result_1);                          //chuyenr result_1 sang decimal rồi lưu vào result
+        result+=1;                                              //result cộng thêm 1
+        result_1 = dec_to_hex(result);                          //chuyển result sang dạng string hex rồi lưu vào result_1
         
-        string res_data = get2LastBit(data_temp);
-        string res_final = get2LastBit(result_1);
+        string res_data = get2LastBit(data_temp);               //lấy 2 kí tự cuối của dòng đang xét (byte checksum)
+        string res_final = get2LastBit(result_1);               //lấy 2 kí tự cuối của result_1  (1 byte)
         
-        if(res_final!=res_data)
+        if(res_final!=res_data)                                 //so sánh 1 byte cuối của result_1 với byte checksum của dòng đang xét
         {
-            cout<<"Error checksum in line "<<line;
+            cout<<"Error checksum in line "<<line;              //in lỗi nếu có
             return false;
         }
 
-        string error_check = "";
+        string error_check = "";                                //check count_byte của dòng đang xét có nhỏ hơn 32 bits không
         error_check += data_temp[0];
         error_check += data_temp[1];
         if(hex_to_dec(error_check) > 32)
@@ -217,7 +234,7 @@ bool check_error_line_by_line(char* data, int size)
             return false;
         }
 
-        error_check = "";
+        error_check = "";                                       //check option_byte của dòng đang xét xem có thỏa mãn không
         error_check += data_temp[6];
         error_check += data_temp[7];
         if(error_check!="00"&&error_check!="01"&&error_check!="02"&&error_check!="04")
