@@ -52,7 +52,7 @@ bool is_hex(char* text, int size, char a[])    //input là một string
 int bin_to_dec(string bin) 
 {
     int res=0;
-    for(int i=0;i<bin.size()-1;i++)
+    for(int i=0;i<=bin.size()-1;i++)
     {
         res+=(bin[i]-48)*pow(2,bin.size()-1-i);
     }
