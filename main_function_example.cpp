@@ -65,7 +65,7 @@ int main(int argc, char *argv[]){
   // }
   
 
-  Print(byteData, byteNum);
+  Display(byteData, byteNum);
   
 
 

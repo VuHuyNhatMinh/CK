@@ -122,5 +122,6 @@ int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
     {
         totalByteRead += lineTemp[lineIndex].byteCount;
     }
-    return totalByteRead;
+
+    return (lineTemp[0].startAddress - 1 + totalByteRead);
 }
