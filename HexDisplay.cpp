@@ -1,9 +1,9 @@
-/*******************************
+/***********************************************************************
  * About: This is the main program.
  * Purpose: Check whether a file is a hex file and display the file content in terminal.
  * Author: Vu Huy Nhat Minh 20191973
  * Github: 
-*******************************/
+***********************************************************************/
 
 #include "ErrorChecking.h"
 #include "GenerateData.h"

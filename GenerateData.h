@@ -1,3 +1,9 @@
+/***********************************************************************
+ * About: This is the program for processing data.
+ * Purpose: get data from file, convert from dec to hex and vice versa.
+ * Author: Vu Huy Nhat Minh 20191973
+***********************************************************************/
+
 #ifndef _GENERATE_DATA_
 #define _GENERATE_DATA_
 
@@ -7,6 +13,13 @@
 
 using namespace std;
 
+/*******************************************
+ * About: Get data from file hex.
+ * Input: 
+- buffer: array of characters which hold content.
+- filename: name of the file.      
+ * Output: array of char from filename.
+*******************************************/
 void getData(char* buffer, string filename)
 {
     ifstream f;
@@ -17,6 +30,13 @@ void getData(char* buffer, string filename)
     f.close();
 }
 
+/*******************************************
+ * About: Seperate line from character array.
+ * Input: 
+- text: array of characters which hold content
+- size: size of array used.      
+ * Output: single line from array (which start from ':' and end at '\n').
+*******************************************/
 string separateLine(char* text, int size) 
 {
     static int i = 0;
@@ -46,7 +66,12 @@ string separateLine(char* text, int size)
     return line;
 }
 
-//Function to convert single character (hexadecimal) to int (decimal). 
+/*******************************************
+ * About: Convert single character (hexadecimal) to integer (decimal).
+ * Input: A hexadecimal character    
+ * Output: A decimal integer value.
+*******************************************/
+//Function to . 
 uint8_t HexChar2Int(char hex){
     if (hex >= '0' && hex <= '9')
     {
@@ -64,8 +89,11 @@ uint8_t HexChar2Int(char hex){
     return 0;
 }
 
-
-//Function to conver 2 character (hexadecimal) into 1 interger ( 1 byte unsigned int)
+/*******************************************
+ * About: Conver 2 hexadecimal characters to 1 interger value  (1 byte unsigned int).
+ * Input: 2 hexadecimal characters.    
+ * Output: A decimal integer value.
+*******************************************/
 uint8_t HexChar2Byte(char hex[2]){
     return (HexChar2Int(hex[1])+16*HexChar2Int(hex[0]));
 }
