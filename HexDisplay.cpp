@@ -17,13 +17,13 @@ int main(int argc, char* argv[])
 {
     /* Check whether open file data or not */
     #ifndef DEBUG
-        if (!check_open(argv[1]))
+        if (!checkOpen(argv[1]))
         {
             return 1;
         }
     #else
         char inputFile[100] = "6.hex";
-        if (!check_open(inputFile))
+        if (!checkOpen(inputFile))
         {
             return 1;
         }
@@ -39,19 +39,19 @@ int main(int argc, char* argv[])
 
     /* Check whether a file is a hex file */
     #ifndef DEBUG
-        if (!is_hex(data, MAXFILESIZE, argv[1]))
+        if (!isHex(data, MAXFILESIZE, argv[1]))
         {
             return 1;
         }
     #else
-        if (!is_hex(data, MAXFILESIZE, inputFile))
+        if (!isHex(data, MAXFILESIZE, inputFile))
         {
             return 1;
         }
     #endif
 
     /* Check format file Hex */
-    if (!check_error_line_by_line(data, MAXFILESIZE))
+    if (!checkFormat(data, MAXFILESIZE))
     {
         return 1;
     }

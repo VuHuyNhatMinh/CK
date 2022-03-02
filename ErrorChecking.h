@@ -12,7 +12,7 @@
 using namespace std;
 
 //check file open, nếu mở được return true, ko thì return false
-bool check_open(char a[])  //input là arg[1]
+bool checkOpen(char a[])  //input là arg[1]
 {
     ifstream fin(a);                             
     if(!fin.is_open())  
@@ -29,7 +29,7 @@ bool check_open(char a[])  //input là arg[1]
 
 //hàm check xem một string có file hex không nếu là file hex thì trả về true, ko phải thì trả về false
 
-bool is_hex(char* text, int size, char a[])    //input là một string
+bool isHex(char* text, int size, char a[])    //input là một string
 {
     for(int i = 0; i < size ; i = i + 1)
     {
@@ -50,7 +50,7 @@ bool is_hex(char* text, int size, char a[])    //input là một string
 
 //check các lỗi như checksum, lỗi count_byte, lỗi option_byte
 //đầu vào là string tất cả data, trả về true nếu không lỗi, trả về false + in ra loại lỗi ở dòng nào đó (lỗi ở dòng đầu tiên) 
-bool check_error_line_by_line(char* data, int size)
+bool checkFormat(char* data, int size)
 {
     int line = 1;                                               //lưu dòng đang xét là dòng bao nhiêu
     while(1)

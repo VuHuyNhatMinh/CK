@@ -1,4 +1,6 @@
-// Nguyen Tien Linh 20191924
+/*
+ Author : Nguyen Tien Linh 20191924
+*/ 
 #include<iostream>
 using namespace std;
 
@@ -16,7 +18,21 @@ void Process_Zero(uint8_t data[], int data_length){
         }
     }
     return;
-}
+};
+
+//Chuyển các byte sang kí tự tương ứng trong bảng mã Ascii
+//Đầu vào: mảng các byte dữ liệu, độ dài của mảng đó
+//Đầu ra: mảng kí tự tương ứng, truyền theo kiểu tham chiếu
+void Char_Convert(uint8_t data_byte[], int length, char ascii_char[]){
+    //Chạy vòng lặp từ đầu đến cuối, chuyển sang kí tự tương ứng.
+    for (int i = 0; i < length; i++)
+    {
+        ascii_char[i] = (char)data_byte[i];
+    }
+    return;
+};
+//In ra vùng giữa (sau 2 dòng đầu)
+
 
 void Print_Line(int line, uint8_t buffer[]){
     printf("     %04X     |", line*16 );
@@ -30,8 +46,8 @@ void Print_Line(int line, uint8_t buffer[]){
         printf("%c", (char)buffer[line*16 + i] );
     }
     printf("\n");
-}
-
+};
+// In ra vùng đầu của hiển thị(2 dòng đầu )
 void Print_Header(){
     printf("\nStart Address |");
     for (int i = 0; i < 16; i++)
@@ -54,8 +70,8 @@ void Print_Header(){
         }
     }
     printf("\n");
-}
-
+};
+// In ra vùng cuối hiển thị(2 dòng cuối)
 void Print_Footer(int current_page, int total_page){
     int i = 1;
     while (i < 81)
@@ -76,7 +92,7 @@ void Print_Footer(int current_page, int total_page){
 };
 
 
-void Display(uint8_t buffer[], int length){
+void Print(uint8_t buffer[], int length){
     //Chuyển các giá trị không in được thành FF
     Process_Zero(buffer, length);
     
@@ -87,8 +103,9 @@ void Display(uint8_t buffer[], int length){
     //Hiển thị 3 vùng ra màn hình
     while (page < total_page)
     {
+        system("cls");
         Print_Header();
-        for ( line = 0; line < 25; line++)
+        for ( line = 0; line < 24; line++)
         {
             if ((25*page + line) < (length/16 + 1))
             {
@@ -97,24 +114,12 @@ void Display(uint8_t buffer[], int length){
             
         }
         Print_Footer(page + 1, total_page);
+        system("pause");
         page++;
         
-        if (page < total_page)
-        {
-            printf("Do you want to continue?[Y/N] ");
-            char c = getchar();
-            if (c == 'Y' || c == 'y')
-            {
-                getchar();
-                system("cls");
-                continue;                     
-            }
-            else if (c == 'N' || c == 'n')
-            {
-                break;
-            }
-        }
     }
+    
+
 };
 
 
