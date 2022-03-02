@@ -20,6 +20,8 @@ struct Line {
 };
 
 //Get infomation of single line
+//Input: character array of hex line.
+//Output: Line struct contain information of line. (Pointer of output is an input argument)
 bool GetLine(char hexLineInput[], Line *intOutput ){
     char temp[2];
     uint8_t addTemp;
@@ -70,20 +72,23 @@ bool GetLine(char hexLineInput[], Line *intOutput ){
     return true;
 };
 
+
+//Count the line in char array input
 int LineCount(char hexInput[]){
     int i = 0, lineCount = 0;
     while (hexInput[i] != '\0')
     {
         if(hexInput[i] == ':'){
-            lineCount ++;
+            lineCount ++; //Count line by ":" mark
         }
         i++;
     }
-    return lineCount;
+    return lineCount; //Output: line number
 }
 
 
 //Read line by line and Write to out put.
+
 int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
     int lineIndex = 0;
     int byteIndex = 0;
