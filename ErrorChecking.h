@@ -221,7 +221,7 @@ bool check_error_line_by_line(char* data, int size)
         
         if(res_final!=res_data)                                 //so sánh 1 byte cuối của result_1 với byte checksum của dòng đang xét
         {
-            cout<<"Error checksum in line "<<line;              //in lỗi nếu có
+            cout<<"Error: Wrong checksum in line "<<line;              //in lỗi nếu có
             return false;
         }
 
@@ -230,7 +230,7 @@ bool check_error_line_by_line(char* data, int size)
         error_check += data_temp[1];
         if(hex_to_dec(error_check) > 32)
         {
-            cout << "Out of 32 bits range in "<< line;
+            cout << "Error: Out of 32 bits range in "<< line;
             return false;
         }
 
@@ -239,7 +239,7 @@ bool check_error_line_by_line(char* data, int size)
         error_check += data_temp[7];
         if(error_check!="00"&&error_check!="01"&&error_check!="02"&&error_check!="04")
         {
-            cout<<"option byte "<<error_check<<" is not valid in line "<<line;
+            cout<<"Error: Option byte "<<error_check<<" is not valid in line "<<line;
             return false;
         }
 
