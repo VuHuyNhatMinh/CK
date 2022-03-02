@@ -92,7 +92,7 @@ int LineCount(char hexInput[]){
 int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
     int lineIndex = 0;
     int byteIndex = 0;
-    int totalByteRead = 0;
+    int length = 0;
      
     //Get line count
     int linesInHexfile = LineCount(hexInput);
@@ -118,10 +118,14 @@ int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
         byteIndex = 0;
         lineIndex++;
     }
+
+    //find and return length of buffer for printing 
     for (lineIndex = 0; lineIndex < linesInHexfile; lineIndex++)
     {
-        totalByteRead += lineTemp[lineIndex].byteCount;
+        if((lineTemp[lineIndex].startAddress - 1 + lineTemp[lineIndex].byteCount) > length){
+            length = (lineTemp[lineIndex].startAddress - 1 + lineTemp[lineIndex].byteCount);
+        }
     }
 
-    return (lineTemp[0].startAddress - 1 + totalByteRead);
+    return length;
 }
