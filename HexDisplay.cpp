@@ -51,10 +51,10 @@ int main(int argc, char* argv[])
     #endif
 
     /* Check format file Hex */
-    // if (!check_error_line_by_line(data, MAXFILESIZE))
-    // {
-    //     return 1;
-    // }
+    if (!check_error_line_by_line(data, MAXFILESIZE))
+    {
+        return 1;
+    }
 
     /* Create content to display */
     uint8_t byteData[MAXFILESIZE] = {0};
