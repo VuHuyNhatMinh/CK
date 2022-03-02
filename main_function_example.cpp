@@ -12,7 +12,7 @@
 
 int main(int argc, char *argv[]){
   //Variables intialize.
-  char inputFileDir[MAXLENGTH] ="test.hex";
+  char inputFileDir[MAXLENGTH] ="6.hex";
   FILE *fptr;
   char temp[LINELENGHTLIMIT] ;
   char buffer[MAXFILESIZE];//Max size of 64 KBytes.
@@ -65,7 +65,7 @@ int main(int argc, char *argv[]){
   // }
   
 
-  Print(byteData, byteNum);
+  Display(byteData, byteNum);
   
 
 

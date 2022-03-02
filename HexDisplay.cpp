@@ -11,7 +11,7 @@
 #include "Print.h"
 
 #define MAXFILESIZE 65536
-// #define DEBUG
+#define DEBUG
 
 int main(int argc, char* argv[]) 
 {
@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
             return 1;
         }
     #else
-        char inputFile[100] = "test.hex";
+        char inputFile[100] = "6.hex";
         if (!check_open(inputFile))
         {
             return 1;
