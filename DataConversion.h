@@ -1,5 +1,6 @@
 /* Nguyen Dinh Quoc Dai _ MSV: 20191724  */
-
+#ifndef _DATA_CONVERSION_
+#define _DATA_CONVERSION_
 
 #include<cstdio>
 #include<cstdint>
@@ -129,3 +130,5 @@ int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
 
     return length;
 }
+
+#endif

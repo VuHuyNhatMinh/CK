@@ -8,7 +8,7 @@
 #include "ErrorChecking.h"
 #include "GenerateData.h"
 #include "DataConversion.h"
-#include "Print.h"
+#include "DisplayData.h"
 
 #define MAXFILESIZE 65536
 // #define DEBUG
@@ -30,6 +30,7 @@ int main(int argc, char* argv[])
     #endif
 
     /* Get data */
+    // Character array
     char data[MAXFILESIZE];
     #ifndef DEBUG
         getData(data, argv[1]);
@@ -57,6 +58,7 @@ int main(int argc, char* argv[])
     }
 
     /* Create content to display */
+    // Unsigned integer 8 bit array
     uint8_t byteData[MAXFILESIZE] = {0};
     int byteNum = ParseLineByLine(data, byteData);
 

@@ -1,6 +1,6 @@
 /***********************************************************************
  * About: This is the program for processing data.
- * Purpose: get data from file, convert from dec to hex and vice versa.
+ * Purpose: get data from file, convert between data.
 ***********************************************************************/
 
 #ifndef _GENERATE_DATA_

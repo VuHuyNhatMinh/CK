@@ -1,3 +1,7 @@
+/*
+    Author: Dinh Hong Quan 20192031
+*/
+
 #ifndef _ERROR_CHECKING_
 #define _ERROR_CHECKING_
 
@@ -86,7 +90,7 @@ bool checkFormat(char* data, int size)
         int number_of_bytes_error = data_temp.size()-10;
             if(number_of_bytes_error%2==1)
             {
-                cout<<"Error: The size of a Intel Hex block is invalid in line "<<line;
+                cout<<"Error: Record-length is not matched with the number data bytes in line "<<line;
                 return false;
             }
             else
@@ -96,7 +100,7 @@ bool checkFormat(char* data, int size)
                 error_check += data_temp[1];
                 if(number_of_bytes_error/2!=hex_to_dec(error_check))
                 {
-                    cout<<"Error: The size of a Intel Hex block is invalid in line "<<line;
+                    cout<<"Error: Record-length is not matched with the number data bytes in line "<<line;
                     return false;
                 }
             }
@@ -142,23 +146,6 @@ bool checkFormat(char* data, int size)
             cout<<"Error: Wrong checksum in line "<<line;              //in lỗi nếu có
             return false;
         }
-
-                                       
-        
-        /*                                                      //check count_byte của dòng đang xét có nhỏ hơn 32 bits không
-        error_check += data_temp[0];                    
-        error_check += data_temp[1];
-        if(hex_to_dec(error_check) > 32)
-        {
-            cout << "Error: Out of 32 bits range in "<< line;
-            return false;
-        }
-        */
-       
-        
-
-
-
         line+=1;
     }
     return true;
