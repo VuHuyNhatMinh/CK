@@ -94,7 +94,7 @@ bool checkFormat(char* data, int size)
                 error_check = "";
                 error_check += data_temp[0];
                 error_check += data_temp[1];
-                if(number_of_bytes_error!=hex_to_dec(error_check))
+                if(number_of_bytes_error/2!=hex_to_dec(error_check))
                 {
                     cout<<"Error: The size of a Intel Hex block is invalid in line "<<line;
                     return false;
