@@ -68,8 +68,38 @@ bool check_error_line_by_line(char* data, int size)
 
         int result=0;                                           //lưu giá trị decimal khi cộng các các byte trong quá trình checksum
         string result_1="";                                     //lưu giá trị hex hoặc binary khi cộng các byte trong quá trình checksum
+        string error_check = "";                                //biến lưu tạm 1 byte nào đó 
+
+                                       
+        error_check += data_temp[6];
+        error_check += data_temp[7];
+
+        //check option_byte của dòng đang xét xem có thỏa mãn không
+
+        if(error_check!="00"&&error_check!="01"&&error_check!="02"&&error_check!="04")
+        {
+            cout<<"Error: Record type "<<error_check<<" is not valid in line "<<line;
+            return false;
+        }
 
 
+        int number_of_bytes_error = data_temp.size()-10;
+            if(number_of_bytes_error%2==1)
+            {
+                cout<<"Error: The size of a Intel Hex block is invalid in line "<<line;
+                return false;
+            }
+            else
+            {
+                error_check = "";
+                error_check += data_temp[0];
+                error_check += data_temp[1];
+                if(number_of_bytes_error!=hex_to_dec(error_check))
+                {
+                    cout<<"Error: The size of a Intel Hex block is invalid in line "<<line;
+                    return false;
+                }
+            }
 
         for(int j=0;j<=data_temp.size()-4;j+=2)                 //cộng tất cả các byte phải checksum của một dòng
         {
@@ -113,10 +143,10 @@ bool check_error_line_by_line(char* data, int size)
             return false;
         }
 
-        string error_check = "";                                //check count_byte của dòng đang xét có nhỏ hơn 32 bits không
+                                       
         
-        /*
-        error_check += data_temp[0];
+        /*                                                      //check count_byte của dòng đang xét có nhỏ hơn 32 bits không
+        error_check += data_temp[0];                    
         error_check += data_temp[1];
         if(hex_to_dec(error_check) > 32)
         {
@@ -125,14 +155,9 @@ bool check_error_line_by_line(char* data, int size)
         }
         */
        
-        error_check = "";                                       //check option_byte của dòng đang xét xem có thỏa mãn không
-        error_check += data_temp[6];
-        error_check += data_temp[7];
-        if(error_check!="00"&&error_check!="01"&&error_check!="02"&&error_check!="04")
-        {
-            cout<<"Error: Record type "<<error_check<<" is not valid in line "<<line;
-            return false;
-        }
+        
+
+
 
         line+=1;
     }
