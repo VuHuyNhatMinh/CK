@@ -11,7 +11,7 @@
 #include "Print.h"
 
 #define MAXFILESIZE 65536
-#define DEBUG
+// #define DEBUG
 
 int main(int argc, char* argv[]) 
 {
