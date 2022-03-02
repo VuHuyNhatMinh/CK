@@ -15,7 +15,7 @@ struct Line {
     uint8_t byteCount = 0; // ll - hold length
     uint16_t startAddress = 0; //aaaa - hold starting address
     uint8_t dataType = 0; //tt - hold data type value
-    uint8_t data[16] = {0}; //[dddd....] hold data value maximum of 32 byte
+    uint8_t data[32] = {0}; //[dddd....] hold data value maximum of 32 byte
     uint8_t checkSum = 0;  //cc - hold check sum value
 };
 
@@ -118,9 +118,8 @@ int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
     int linesInHexfile = LineCount(hexInput);
 
     //Data of single line.
-    uint8_t lineData[16] = {0}; //up to 16 bytes per line
-    char lineRawData[42] = {'\0'}; // up to 21 (bytes) * 2 (chars) per line 
-    struct Line lineTemp[4096]; //total 21*4096 = 86 Kbytes. 
+    char lineRawData[74] = {'\0'}; // up to 37 (bytes) * 2 (chars) per line 
+    struct Line lineTemp[4096]; //total 37*4096 = 148 Kbytes. 
 
     //Parse line by line and write to output.
     while (lineIndex < linesInHexfile)
@@ -133,12 +132,9 @@ int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
             while (byteIndex < lineTemp[lineIndex].byteCount)
             {
                 hexDataOutput[lineTemp[lineIndex].startAddress + byteIndex] = lineTemp[lineIndex].data[byteIndex];
-                lineData[byteIndex] = '\0';
                 byteIndex++;
-            }
-            
+            }          
         }
-        // rawDataIndex = 0;
         byteIndex = 0;
         lineIndex++;
     }
