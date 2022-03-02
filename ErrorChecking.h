@@ -239,7 +239,7 @@ bool check_error_line_by_line(char* data, int size)
         error_check += data_temp[7];
         if(error_check!="00"&&error_check!="01"&&error_check!="02"&&error_check!="04")
         {
-            cout<<"option byte "<<error_check<<" is not valid in line "<<line;  //in lỗi option_byte
+            cout<<"option byte "<<error_check<<" is not valid in line "<<line;
             return false;
         }
 
