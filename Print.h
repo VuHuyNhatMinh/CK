@@ -101,7 +101,6 @@ void Print(uint8_t buffer[], int length){
     //Hiển thị 3 vùng ra màn hình
     while (page < total_page)
     {
-        system("cls");
         Print_Header();
         for ( line = 0; line < 25; line++)
         {
@@ -112,12 +111,8 @@ void Print(uint8_t buffer[], int length){
             
         }
         Print_Footer(page + 1, total_page);
-        system("pause");
-        page++;
-        
+        page++;      
     }
-    
-
 };
 
 

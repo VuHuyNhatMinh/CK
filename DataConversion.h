@@ -5,10 +5,9 @@
 #include<cstdint>
 #include <cstdbool>
 #include<iostream>
+#include "GenerateData.h"
+
 using namespace std;
-
-
-
 
 // Define line structure
 struct Line {   
@@ -112,8 +111,6 @@ int LineCount(char hexInput[]){
 //Read line by line and Write to out put.
 int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
     int lineIndex = 0;
-    int charIndex = 0;
-    int rawDataIndex = 0;
     int byteIndex = 0;
     int totalByteRead = 0;
      
@@ -128,17 +125,7 @@ int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
     //Parse line by line and write to output.
     while (lineIndex < linesInHexfile)
     {
-        //Read line from ':' until '\n'.
-        while (hexInput[charIndex] != '\n')
-        {
-            //skip ':' mark.
-            if(hexInput[charIndex] != ':') {
-              lineRawData[rawDataIndex] = hexInput[charIndex];
-              rawDataIndex++;
-            }
-            charIndex++;
-        }
-        charIndex++;
+        strcpy(lineRawData, separateLine(hexInput, 65536).c_str());
         //Parse single line.
         if (GetLine(lineRawData, &lineTemp[lineIndex] ))
         {
@@ -151,7 +138,7 @@ int ParseLineByLine(char hexInput[], uint8_t hexDataOutput[]){
             }
             
         }
-        rawDataIndex = 0;
+        // rawDataIndex = 0;
         byteIndex = 0;
         lineIndex++;
     }
