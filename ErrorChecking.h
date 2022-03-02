@@ -176,7 +176,22 @@ bool check_error_line_by_line(char* data, int size)
             a+=data_temp[j+1];
             result+=hex_to_dec(a);
         }
-        result_1 = dec_to_bin(result);
+
+
+        if(dec_to_bin(result).size()<8)
+        {
+            for(int n=1;n<=(8-dec_to_bin(result).size());n++)
+            {
+                result_1+='0';
+            }
+        }
+        else if(dec_to_bin(result).size()>=8)
+        {
+            result_1+='0';
+        }
+
+        
+        result_1 += dec_to_bin(result);
 
         result_1 = inverse(result_1);
 
