@@ -19,31 +19,6 @@ struct Line {
     uint8_t checkSum = 0;  //cc - hold check sum value
 };
 
-//Function to convert single character (hexadecimal) to int (decimal). 
-uint8_t HexChar2Int(char hex){
-    if (hex >= '0' && hex <= '9')
-    {
-        return (uint8_t)(hex - '0');
-    }
-    if (hex >= 'A' && hex <= 'F')
-    {
-        return (uint8_t)(hex - 'A' + 10);
-    }
-    if (hex >= 'a' && hex <= 'f')
-    {
-        return (uint8_t)(hex - 'a' + 10);
-    }
-    
-    return 0;
-}
-
-
-//Function to conver 2 character (hexadecimal) into 1 interger ( 1 byte unsigned int)
-uint8_t HexChar2Byte(char hex[2]){
-    return (HexChar2Int(hex[1])+16*HexChar2Int(hex[0]));
-}
-
-
 //Get infomation of single line
 bool GetLine(char hexLineInput[], Line *intOutput ){
     char temp[2];

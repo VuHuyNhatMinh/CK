@@ -11,7 +11,7 @@
 #include "Print.h"
 
 #define MAXFILESIZE 65536
-#define DEBUG
+// #define DEBUG
 
 int main(int argc, char* argv[]) 
 {
@@ -61,6 +61,6 @@ int main(int argc, char* argv[])
     int byteNum = ParseLineByLine(data, byteData);
 
     /* Display */
-    Print(byteData, byteNum);
+    Display(byteData, byteNum);
 }
 

@@ -16,21 +16,7 @@ void Process_Zero(uint8_t data[], int data_length){
         }
     }
     return;
-};
-
-//Chuyển các byte sang kí tự tương ứng trong bảng mã Ascii
-//Đầu vào: mảng các byte dữ liệu, độ dài của mảng đó
-//Đầu ra: mảng kí tự tương ứng, truyền theo kiểu tham chiếu
-void Char_Convert(uint8_t data_byte[], int length, char ascii_char[]){
-    //Chạy vòng lặp từ đầu đến cuối, chuyển sang kí tự tương ứng.
-    for (int i = 0; i < length; i++)
-    {
-        ascii_char[i] = (char)data_byte[i];
-    }
-    return;
-};
-
-
+}
 
 void Print_Line(int line, uint8_t buffer[]){
     printf("     %04X     |", line*16 );
@@ -44,7 +30,7 @@ void Print_Line(int line, uint8_t buffer[]){
         printf("%c", (char)buffer[line*16 + i] );
     }
     printf("\n");
-};
+}
 
 void Print_Header(){
     printf("\nStart Address |");
@@ -68,7 +54,7 @@ void Print_Header(){
         }
     }
     printf("\n");
-};
+}
 
 void Print_Footer(int current_page, int total_page){
     int i = 1;
@@ -90,7 +76,7 @@ void Print_Footer(int current_page, int total_page){
 };
 
 
-void Print(uint8_t buffer[], int length){
+void Display(uint8_t buffer[], int length){
     //Chuyển các giá trị không in được thành FF
     Process_Zero(buffer, length);
     
@@ -111,7 +97,23 @@ void Print(uint8_t buffer[], int length){
             
         }
         Print_Footer(page + 1, total_page);
-        page++;      
+        page++;
+        
+        if (page < total_page)
+        {
+            printf("Do you want to continue?[Y/N] ");
+            char c = getchar();
+            if (c == 'Y' || c == 'y')
+            {
+                getchar();
+                system("cls");
+                continue;                     
+            }
+            else if (c == 'N' || c == 'n')
+            {
+                break;
+            }
+        }
     }
 };
 

@@ -12,7 +12,7 @@
 
 int main(int argc, char *argv[]){
   //Variables intialize.
-  char inputFileDir[MAXLENGTH] ="avr_uart.hex";
+  char inputFileDir[MAXLENGTH] ="test.hex";
   FILE *fptr;
   char temp[LINELENGHTLIMIT] ;
   char buffer[MAXFILESIZE];//Max size of 64 KBytes.
