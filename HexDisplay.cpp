@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
             return 1;
         }
     #else
-        char inputFile[100] = "6.hex";
+        char inputFile[100] = "avr_uart.hex";
         if (!checkOpen(inputFile))
         {
             return 1;
@@ -58,8 +58,9 @@ int main(int argc, char* argv[])
     }
 
     /* Create content to display */
-    // Unsigned integer 8 bit array
+    // Unsigned integer 8 bit array of value used
     uint8_t byteData[MAXFILESIZE] = {0};
+    // Numbers of memory used from 0000 to max value used
     int byteNum = ParseLineByLine(data, byteData);
 
     /* Display */

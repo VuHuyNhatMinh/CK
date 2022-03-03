@@ -110,7 +110,7 @@ void Display(uint8_t buffer[], int length){
 
         if (page < total_page)
         {
-            printf("Do you want to continue?[Y/N] ");
+            printf("Do you want to continue?[Y] ");
             char c = getchar();
             if (c == 'Y' || c == 'y')
             {
@@ -118,7 +118,7 @@ void Display(uint8_t buffer[], int length){
                 system("cls");
                 continue;                     
             }
-            else if (c == 'N' || c == 'n')
+            else
             {
                 break;
             }
