@@ -25,11 +25,16 @@ void Process_Zero(uint8_t data[], int data_length){
 };
 
 //In ra vùng giữa (sau 2 dòng đầu)
-void Print_Line(int line, uint8_t buffer[]){
+void Print_Line(int line, uint8_t buffer[], int length ){
     printf("     %04X     |", line*16 );
     for (int i = 0; i < 16; i++)
     {
-        printf("%2X ", buffer[line*16 + i]);
+        if( (line*16 + i) <= length){
+            printf("%2X ", buffer[line*16 + i]);
+        }
+        else{
+            printf("   ");
+        }
     }
     printf("|");
     for (int i = 0; i < 16; i++)
@@ -101,7 +106,7 @@ void Display(uint8_t buffer[], int length){
         {
             if ((25*page + line) < (length/16 + 1))
             {
-                Print_Line((25*page + line), buffer );
+                Print_Line((25*page + line), buffer, length );
             }
 
         }
