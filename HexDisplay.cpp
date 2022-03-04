@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
             return 1;
         }
     #else
-        char inputFile[100] = "testhex7.hex";
+        char inputFile[100] = "testhex6.hex";
         if (!checkOpen(inputFile))
         {
             return 1;

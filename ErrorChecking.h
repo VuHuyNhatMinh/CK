@@ -43,7 +43,7 @@ bool isHex(char* text, int size, char a[])    //input là một string
             break;
         }
         
-        if (c !=':' && c !='\n' && (c<48 || (57<c && c<65)||70<c))
+        if (c !=':' && c !='\n' && (c<48 || (57<c && c<65) || (70<c && c<97) || 102<c)) 
         {
             cout << "Error: " << a << " is not Hex File." << endl;
             return false;
@@ -107,10 +107,10 @@ bool checkFormat(char* data, int size)
 
         for(int j=0;j<=data_temp.size()-4;j+=2)                 //cộng tất cả các byte phải checksum của một dòng
         {
-            string a = "";                                      //lưu 1 byte một trong một dòng (gồm 2 chữ cái hex liên tục) ở dạng string hex
-            a+=data_temp[j];
-            a+=data_temp[j+1];
-            result+=hex_to_dec(a);                              //đổi string hex sang decimal rồi cộng vào result
+            char a[3];                                      //lưu 1 byte một trong một dòng (gồm 2 chữ cái hex liên tục) ở dạng string hex
+            a[0] = data_temp[j];
+            a[1] = data_temp[j+1];
+            result+=HexChar2Byte(a);                              //đổi string hex sang decimal rồi cộng vào result
         }                                                      
         //result =  tổng các byte cần checksum trong một dòng ở dạng decimal
 
@@ -138,10 +138,15 @@ bool checkFormat(char* data, int size)
         result+=1;                                              //result cộng thêm 1
         result_1 = dec_to_hex(result);                          //chuyển result sang dạng string hex rồi lưu vào result_1
         
-        string res_data = get2LastBit(data_temp);               //lấy 2 kí tự cuối của dòng đang xét (byte checksum)
-        string res_final = get2LastBit(result_1);               //lấy 2 kí tự cuối của result_1  (1 byte)
+        char res_data[3];
+        get2LastBit(res_data, data_temp);               //lấy 2 kí tự cuối của dòng đang xét (byte checksum)
+        uint8_t temp_data = HexChar2Byte(res_data);
         
-        if(res_final!=res_data)                                 //so sánh 1 byte cuối của result_1 với byte checksum của dòng đang xét
+        char res_final[3];
+        get2LastBit(res_final, result_1);
+        uint8_t temp_final = HexChar2Byte(res_final);               //lấy 2 kí tự cuối của result_1  (1 byte)
+        
+        if(temp_data!=temp_final)                                 //so sánh 1 byte cuối của result_1 với byte checksum của dòng đang xét
         {
             cout<<"Error: Wrong checksum in line "<<line;              //in lỗi nếu có
             return false;

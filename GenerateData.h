@@ -181,12 +181,10 @@ string inverse(string text)         //đầu vào là binary ở dạng string, 
 
 
 //Lấy 2 kí tự cuối cùng của một string 
-string get2LastBit(string text)         
+void get2LastBit(char* arr, string text)         
 {
-    string temp;
-    temp += text[text.size()-2];
-    temp += text[text.size()-1]; 
-    return temp;
+    arr[0] = text[text.size()-2];
+    arr[1] = text[text.size()-1]; 
 }
 
 
