@@ -10,6 +10,8 @@
 #include <fstream>
 #include <cstring>
 
+#define MAXFILESIZE 65536
+
 using namespace std;
 
 /*******************************************
@@ -25,7 +27,17 @@ void getData(char* buffer, string filename)
     f.open(filename);
     string text;
     getline(f, text, '\0');
-    strcpy(buffer, text.c_str());
+    if (text.length() > MAXFILESIZE)
+    {
+        for (int i = 0 ; i < MAXFILESIZE ; i = i + 1)
+        {
+            buffer[i] = text[i];
+        }
+    }
+    else
+    {
+        strcpy(buffer, text.c_str());
+    }
     f.close();
 }
 
