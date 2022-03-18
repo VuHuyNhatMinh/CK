@@ -11,6 +11,12 @@ This is a program used to check whether a file is a hex file or not? If yes, the
 - Could not open Hex File.
 - Wrong format on specific line.
 
+# AUTHORS
+1. Nguyen Dinh Quoc Dai 20191724
+1. Nguyen Tien Linh 20191924
+1. Vu Huy Nhat Minh 20191973
+1. Dinh Hong Quan 20192031
+
 # REFERENCES
 [Wiki](https://en.wikipedia.org/wiki/Intel_HEX) 
 
